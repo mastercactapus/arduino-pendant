@@ -3,16 +3,16 @@
 
 #define PULSE_A 2
 #define PULSE_B 3
-#define PULSE_AL 4
-#define PULSE_BL 5
+// #define PULSE_AL 4
+// #define PULSE_BL 5
 
 #define AXIS_1 PIN_A2
 #define AXIS_2 PIN_A3
 #define AXIS_3 PIN_A4
 #define AXIS_4 PIN_A5
 
-#define AXIS_SHIFT_0 12
-#define AXIS_SHIFT_1 11
+// #define AXIS_SHIFT_0 12
+// #define AXIS_SHIFT_1 11
 
 #define MAG_X1 10
 #define MAG_X10 9
@@ -34,16 +34,16 @@ void setup()
 {
   pinMode(PULSE_A, INPUT);
   pinMode(PULSE_B, INPUT);
-  pinMode(PULSE_AL, INPUT);
-  pinMode(PULSE_BL, INPUT);
+  // pinMode(PULSE_AL, INPUT);
+  // pinMode(PULSE_BL, INPUT);
 
   pinMode(AXIS_1, INPUT_PULLUP);
   pinMode(AXIS_2, INPUT_PULLUP);
   pinMode(AXIS_3, INPUT_PULLUP);
   pinMode(AXIS_4, INPUT_PULLUP);
 
-  pinMode(AXIS_SHIFT_0, INPUT_PULLUP);
-  pinMode(AXIS_SHIFT_1, INPUT_PULLUP);
+  // pinMode(AXIS_SHIFT_0, INPUT_PULLUP);
+  // pinMode(AXIS_SHIFT_1, INPUT_PULLUP);
 
   pinMode(MAG_X1, INPUT_PULLUP);
   pinMode(MAG_X10, INPUT_PULLUP);
@@ -77,12 +77,6 @@ void doPulse()
     steps++;
     break;
   }
-}
-void pulseFallB()
-{
-  // ensure at rest
-  if ((PIND & (_BV(PULSE_AL) | _BV(PULSE_BL) | _BV(PULSE_A) | _BV(PULSE_B))) == (_BV(PULSE_AL) | _BV(PULSE_BL)))
-    steps++;
 }
 
 void sendPin(int pin)
@@ -147,10 +141,10 @@ void doSendState()
   if (!axis)
     return;
 
-  if (!digitalRead(AXIS_SHIFT_0))
-    axis += 4;
-  if (!digitalRead(AXIS_SHIFT_1))
-    axis += 8;
+  // if (!digitalRead(AXIS_SHIFT_0))
+  //   axis += 4;
+  // if (!digitalRead(AXIS_SHIFT_1))
+  //   axis += 8;
 
   Serial.print("STEP:");
   Serial.print(axis);
