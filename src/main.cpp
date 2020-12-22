@@ -91,13 +91,29 @@ void loop()
   sendState.update();
 }
 
+bool sendStatus();
 void doSendState()
+{
+  static int emptyCount = 0;
+  if (sendStatus())
+  {
+    emptyCount = 0;
+  }
+  emptyCount++;
+  if (emptyCount == 10)
+  {
+    emptyCount = 0;
+    Serial.println("READY");
+  }
+}
+
+bool sendStatus()
 {
   if (digitalRead(ESTOP))
   {
     wasStop = true;
     Serial.println("STOP");
-    return;
+    return true;
   }
 
   if (wasStop)
@@ -107,7 +123,7 @@ void doSendState()
     steps = 0;
     interrupts();
     Serial.println("READY");
-    return;
+    return true;
   }
 
   int8_t curSteps;
@@ -117,7 +133,7 @@ void doSendState()
   interrupts();
 
   if (!curSteps)
-    return;
+    return false;
 
   int mag = 0;
   if (!digitalRead(MAG_X1))
@@ -127,7 +143,7 @@ void doSendState()
   if (!digitalRead(MAG_X100))
     mag = 100;
   if (!mag)
-    return;
+    return false;
 
   int axis = 0;
   if (!digitalRead(AXIS_1))
@@ -139,7 +155,7 @@ void doSendState()
   if (!digitalRead(AXIS_4))
     axis = 4;
   if (!axis)
-    return;
+    return false;
 
   // if (!digitalRead(AXIS_SHIFT_0))
   //   axis += 4;
@@ -152,4 +168,6 @@ void doSendState()
   Serial.print(mag);
   Serial.print(",");
   Serial.println(curSteps);
+
+  return true;
 }
