@@ -28,7 +28,7 @@ volatile int8_t steps = 0;
 void doSendState();
 void doPulse();
 
-Ticker sendState(doSendState, 100, 0, MILLIS);
+Ticker sendState(doSendState, 10, 0, MILLIS);
 
 void setup()
 {

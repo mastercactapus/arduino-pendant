@@ -12,7 +12,7 @@ Messages are terminated with `\r\n`.
 | `STOP`       | Sent when ESTOP is triggered.                                                                                                                                                                      |
 | `STEP:1,1,1` | Indicates a step action should be performed. The 3 comma-separated values are as follows (in order): **axis index** (1-12, X=1, Y=2, Z=3, etc), **magnification** (1, 10, or 100), **step count**. |
 
-`STEP` and `STOP` commands are sent at most every 100ms.
+`STEP` and `STOP` commands are sent at most every 10ms.
 
 ## Pin Connections
 
